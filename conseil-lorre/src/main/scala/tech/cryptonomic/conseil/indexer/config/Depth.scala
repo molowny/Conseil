@@ -1,4 +1,4 @@
-package tech.cryptonomic.conseil.common.config
+package tech.cryptonomic.conseil.indexer.config
 
 sealed trait Depth
 case object Everything extends Depth

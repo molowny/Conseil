@@ -21,7 +21,6 @@ import tech.cryptonomic.conseil.common.testkit.InMemoryDatabase
 import tech.cryptonomic.conseil.common.testkit.util.RandomSeed
 import tech.cryptonomic.conseil.common.tezos.FeeOperations.AverageFees
 import tech.cryptonomic.conseil.common.tezos.TezosTypes.{Account, AccountId, BlockTagged}
-import tech.cryptonomic.conseil.common.util.ConfigUtil
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.duration._
@@ -79,7 +78,7 @@ class TezosPlatformDiscoveryOperationsTest
           )
         )
 
-        ConfigUtil.getNetworks(config, "tezos") shouldBe List(Network("alphanet", "Alphanet", "tezos", "alphanet"))
+        config.getNetworks("tezos") shouldBe List(Network("alphanet", "Alphanet", "tezos", "alphanet"))
       }
 
       "return two networks" in {
@@ -104,7 +103,7 @@ class TezosPlatformDiscoveryOperationsTest
                 )
           )
         )
-        ConfigUtil.getNetworks(config, "tezos") should have size 2
+        config.getNetworks("tezos") should have size 2
       }
     }
 

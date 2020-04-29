@@ -2,7 +2,8 @@ package tech.cryptonomic.conseil.indexer
 
 import com.typesafe.scalalogging.LazyLogging
 import tech.cryptonomic.conseil.common.config.Platforms.{TezosConfiguration, UnknownPlatformConfiguration}
-import tech.cryptonomic.conseil.indexer.LorreAppConfig.LORRE_FAILURE_IGNORE_VAR
+import tech.cryptonomic.conseil.indexer.config.LorreAppConfig.LORRE_FAILURE_IGNORE_VAR
+import tech.cryptonomic.conseil.indexer.config.LorreAppConfig
 import tech.cryptonomic.conseil.indexer.tezos.TezosIndexer
 
 import scala.concurrent.Await

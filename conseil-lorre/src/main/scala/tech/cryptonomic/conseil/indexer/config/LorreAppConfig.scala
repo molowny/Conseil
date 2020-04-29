@@ -1,20 +1,22 @@
-package tech.cryptonomic.conseil.indexer
+package tech.cryptonomic.conseil.indexer.config
 
 import com.github.ghik.silencer.silent
-import tech.cryptonomic.conseil.common.config._
-import tech.cryptonomic.conseil.common.config.Platforms.PlatformConfiguration
-import tech.cryptonomic.conseil.common.util.ConfigUtil.Pureconfig.{loadAkkaStreamingClientConfig, loadPlatformConfiguration}
-import pureconfig.{CamelCase, ConfigFieldMapping, ConfigReader, loadConfig}
-import pureconfig.error.ConfigReaderFailures
-import pureconfig.generic.{EnumCoproductHint, ProductHint}
+import com.typesafe.config.Config
+import pureconfig.error.{ConfigReaderFailures, ThrowableFailure}
 import pureconfig.generic.auto._
+import pureconfig.generic.{EnumCoproductHint, FieldCoproductHint, ProductHint}
+import pureconfig.{loadConfig, CamelCase, ConfigFieldMapping, ConfigReader}
 import scopt.{OptionParser, Read}
+import tech.cryptonomic.conseil.common.config.Platforms._
+import tech.cryptonomic.conseil.common.config.{PlatformConfiguration => _, _}
 import tech.cryptonomic.conseil.common.tezos.TezosTypes.BlockHash
-import pureconfig.generic.FieldCoproductHint
+
+import scala.util.Try
 
 /** wraps all configuration needed to run Lorre */
 trait LorreAppConfig {
   import LorreAppConfig._
+  import LorreAppConfig.Loaders._
 
   /* used by scopt to parse the depth object */
   implicit private val depthRead: Read[Option[Depth]] = Read.reads {
@@ -124,4 +126,69 @@ object LorreAppConfig {
       batching: BatchFetchConfiguration,
       verbose: VerboseOutput
   )
+
+  /** Used to pattern match on natural numbers */
+  private[config] object Natural {
+    def unapply(s: String): Option[Int] = util.Try(s.toInt).filter(_ > 0).toOption
+  }
+
+  private[config] object Loaders {
+
+    /*** Reads a specific platform configuration based on given 'platform' and 'network' */
+    def loadPlatformConfiguration(
+        platform: String,
+        network: String
+    ): Either[ConfigReaderFailures, PlatformConfiguration] =
+      // Note that Lorre process allows to run only one integration per process.
+      // Configuration file can contain more than one, thus required parameters.
+      BlockchainPlatform.fromString(platform) match {
+        case Tezos =>
+          for {
+            node <- loadConfig[TezosNodeConfiguration](namespace = s"platforms.$platform.$network.node")
+            tns <- loadConfig[Option[TNSContractConfiguration]](namespace = s"tns.$network")
+          } yield TezosConfiguration(network, node, tns)
+        case UnknownPlatform(_) => Right(UnknownPlatformConfiguration(network))
+      }
+
+    /**
+      * Reads a specific entry in the configuration file, to create a valid akka-http client host-pool configuration
+      *
+      * @param namespace the path where the custom configuration will be searched-for
+      */
+    def loadAkkaStreamingClientConfig(
+        namespace: String
+    ): Either[ConfigReaderFailures, HttpStreamingConfiguration] =
+      // this is where akka searches for the config entry for host connection pool
+      loadConfigForEntryPath(namespace, "akka.http.host-connection-pool").map(HttpStreamingConfiguration)
+
+    private def loadConfigForEntryPath(
+        namespace: String,
+        referenceEntryPath: String
+    ): Either[ConfigReaderFailures, Config] = {
+      //read a conseil-specific entry into the expected path for the config
+      def loadValidatedConfig(rootConfig: Config): Either[ConfigReaderFailures, Config] =
+        Try(
+          rootConfig
+            .getConfig(namespace)
+            .atPath(referenceEntryPath) //puts the config entry where expected by akka
+            .withFallback(rootConfig) //adds default values, where not overriden
+            .ensuring(
+              endConfig =>
+                //verifies all expected entries are there
+                Try(endConfig.checkValid(rootConfig.getConfig(referenceEntryPath), referenceEntryPath)).isSuccess
+            )
+        ).toEither.left.map {
+          //wraps the error into pureconfig's one
+          t =>
+            ConfigReaderFailures(ThrowableFailure(t, None))
+        }
+
+      //compose the configuration reading outcomes
+      for {
+        akkaConf <- loadConfig[Config]
+        validatedConfig <- loadValidatedConfig(akkaConf)
+      } yield validatedConfig
+    }
+  }
+
 }

@@ -1,10 +1,10 @@
-package tech.cryptonomic.conseil.common.config
+package tech.cryptonomic.conseil.api.security
 
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatest.{Matchers, WordSpec}
-import tech.cryptonomic.conseil.common.config.Security.SecurityApi
+import tech.cryptonomic.conseil.api.security.Security.SecurityApi
 
 class SecurityTest extends WordSpec with Matchers with ScalatestRouteTest with ScalaFutures {
 

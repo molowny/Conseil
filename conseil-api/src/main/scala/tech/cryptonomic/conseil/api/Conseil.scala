@@ -13,12 +13,14 @@ import cats.effect.{ContextShift, IO}
 import ch.megard.akka.http.cors.scaladsl.CorsDirectives._
 import com.typesafe.scalalogging.LazyLogging
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport
+import tech.cryptonomic.conseil.api.config.{ConseilAppConfig, ConseilConfiguration, NautilusCloudConfiguration}
 import tech.cryptonomic.conseil.api.directives.EnableCORSDirectives
 import tech.cryptonomic.conseil.common.config.Platforms.PlatformsConfiguration
-import tech.cryptonomic.conseil.common.config.Security.SecurityApi
+import tech.cryptonomic.conseil.api.security.Security.SecurityApi
 import tech.cryptonomic.conseil.common.config._
 import tech.cryptonomic.conseil.common.metadata.{AttributeValuesCacheConfiguration, MetadataService, UnitTransformation}
 import tech.cryptonomic.conseil.api.routes._
+import tech.cryptonomic.conseil.api.security.Security
 import tech.cryptonomic.conseil.common.tezos.{MetadataCaching, TezosPlatformDiscoveryOperations}
 import tech.cryptonomic.conseil.common.util.RecordingDirectives
 import tech.cryptonomic.conseil.common.util.Retry.retry
@@ -80,11 +82,11 @@ object Conseil
     * @return a metadata services object or a failed result
     */
   def initServices(
-      conseilOperations: ConseilOperations,
-      server: ServerConfiguration,
-      platforms: PlatformsConfiguration,
-      metadataOverrides: MetadataConfiguration,
-      nautilusCloud: Option[NautilusCloudConfiguration]
+                    conseilOperations: ConseilOperations,
+                    server: ConseilConfiguration,
+                    platforms: PlatformsConfiguration,
+                    metadataOverrides: MetadataConfiguration,
+                    nautilusCloud: Option[NautilusCloudConfiguration]
   )(implicit executionContext: ExecutionContext, system: ActorSystem, mat: ActorMaterializer): Try[MetadataService] = {
 
     nautilusCloud.foreach { ncc =>
@@ -133,13 +135,13 @@ object Conseil
     * @param verbose flag to state if the server should log a more detailed configuration setup upon startup
     */
   def runServer(
-      metadataService: MetadataService,
-      conseilOperations: ConseilOperations,
-      server: ServerConfiguration,
-      platforms: PlatformsConfiguration,
-      metadataOverrides: MetadataConfiguration,
-      securityApi: SecurityApi,
-      verbose: VerboseOutput
+                 metadataService: MetadataService,
+                 conseilOperations: ConseilOperations,
+                 server: ConseilConfiguration,
+                 platforms: PlatformsConfiguration,
+                 metadataOverrides: MetadataConfiguration,
+                 securityApi: SecurityApi,
+                 verbose: VerboseOutput
   )(implicit executionContext: ExecutionContext, system: ActorSystem, mat: ActorMaterializer) = {
     val tezosDispatcher = system.dispatchers.lookup("akka.tezos-dispatcher")
 

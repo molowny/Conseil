@@ -2,9 +2,9 @@ package tech.cryptonomic.conseil.indexer
 
 import com.typesafe.scalalogging.Logger
 import tech.cryptonomic.conseil.BuildInfo
-import tech.cryptonomic.conseil.common.config.LorreConfiguration
 import tech.cryptonomic.conseil.common.config.Platforms.{BlockchainPlatform, PlatformConfiguration}
 import tech.cryptonomic.conseil.common.io.MainOutputs.{showDatabaseConfiguration, showPlatformConfiguration}
+import tech.cryptonomic.conseil.indexer.config.LorreConfiguration
 
 import scala.concurrent.duration.{Duration, NANOSECONDS}
 

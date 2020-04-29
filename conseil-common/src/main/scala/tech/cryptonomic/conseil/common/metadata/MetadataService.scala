@@ -5,7 +5,6 @@ import cats.syntax.all._
 import tech.cryptonomic.conseil.common.config.Platforms.PlatformsConfiguration
 import tech.cryptonomic.conseil.common.generic.chain.PlatformDiscoveryTypes._
 import tech.cryptonomic.conseil.common.generic.chain.{DataTypes, PlatformDiscoveryOperations}
-import tech.cryptonomic.conseil.common.util.ConfigUtil
 
 import scala.concurrent.Future.successful
 import scala.concurrent.duration._
@@ -20,10 +19,10 @@ class MetadataService(
     platformDiscoveryOperations: Map[String, PlatformDiscoveryOperations]
 )(implicit apiExecutionContext: ExecutionContext) {
 
-  private val platforms = transformation.overridePlatforms(ConfigUtil.getPlatforms(config))
+  private val platforms = transformation.overridePlatforms(config.getPlatforms)
 
   private val networks = platforms.map { platform =>
-    platform.path -> transformation.overrideNetworks(platform.path, ConfigUtil.getNetworks(config, platform.name))
+    platform.path -> transformation.overrideNetworks(platform.path, config.getNetworks(platform.name))
   }.toMap
 
   private val entities = {

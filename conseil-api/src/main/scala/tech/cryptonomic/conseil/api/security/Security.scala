@@ -1,4 +1,4 @@
-package tech.cryptonomic.conseil.common.config
+package tech.cryptonomic.conseil.api.security
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
@@ -12,6 +12,7 @@ import com.typesafe.scalalogging.LazyLogging
 import de.heikoseeberger.akkahttpcirce.ErrorAccumulatingCirceSupport
 import pureconfig.error.{ConfigReaderFailures, ThrowableFailure}
 import pureconfig.generic.auto._
+import tech.cryptonomic.conseil.api.config.NautilusCloudConfiguration
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
