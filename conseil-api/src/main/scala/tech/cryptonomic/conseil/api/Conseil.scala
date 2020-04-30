@@ -82,11 +82,11 @@ object Conseil
     * @return a metadata services object or a failed result
     */
   def initServices(
-                    conseilOperations: ConseilOperations,
-                    server: ConseilConfiguration,
-                    platforms: PlatformsConfiguration,
-                    metadataOverrides: MetadataConfiguration,
-                    nautilusCloud: Option[NautilusCloudConfiguration]
+      conseilOperations: ConseilOperations,
+      server: ConseilConfiguration,
+      platforms: PlatformsConfiguration,
+      metadataOverrides: MetadataConfiguration,
+      nautilusCloud: Option[NautilusCloudConfiguration]
   )(implicit executionContext: ExecutionContext, system: ActorSystem, mat: ActorMaterializer): Try[MetadataService] = {
 
     nautilusCloud.foreach { ncc =>
@@ -135,18 +135,19 @@ object Conseil
     * @param verbose flag to state if the server should log a more detailed configuration setup upon startup
     */
   def runServer(
-                 metadataService: MetadataService,
-                 conseilOperations: ConseilOperations,
-                 server: ConseilConfiguration,
-                 platforms: PlatformsConfiguration,
-                 metadataOverrides: MetadataConfiguration,
-                 securityApi: SecurityApi,
-                 verbose: VerboseOutput
+      metadataService: MetadataService,
+      conseilOperations: ConseilOperations,
+      server: ConseilConfiguration,
+      platforms: PlatformsConfiguration,
+      metadataOverrides: MetadataConfiguration,
+      securityApi: SecurityApi,
+      verbose: VerboseOutput
   )(implicit executionContext: ExecutionContext, system: ActorSystem, mat: ActorMaterializer) = {
     val tezosDispatcher = system.dispatchers.lookup("akka.tezos-dispatcher")
 
     lazy val platformDiscovery = PlatformDiscovery(metadataService)
-    lazy val data = Data(metadataService, metadataOverrides, conseilOperations, server.maxQueryResultSize)(tezosDispatcher)
+    lazy val data =
+      Data(metadataService, metadataOverrides, conseilOperations, server.maxQueryResultSize)(tezosDispatcher)
     implicit val contextShift: ContextShift[IO] = IO.contextShift(executionContext)
     lazy val routeUtil = new RecordingDirectives
 

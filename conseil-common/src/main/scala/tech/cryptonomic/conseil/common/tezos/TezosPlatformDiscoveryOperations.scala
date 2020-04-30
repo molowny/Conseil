@@ -4,7 +4,12 @@ import cats.effect.{ContextShift, IO}
 import com.rklaehn.radixtree.RadixTree
 import slick.dbio.{DBIO, DBIOAction}
 import slick.jdbc.meta.{MColumn, MIndexInfo, MPrimaryKey, MTable}
-import tech.cryptonomic.conseil.common.generic.chain.DataTypes.{AttributesValidationError, HighCardinalityAttribute, InvalidAttributeDataType, InvalidAttributeFilterLength}
+import tech.cryptonomic.conseil.common.generic.chain.DataTypes.{
+  AttributesValidationError,
+  HighCardinalityAttribute,
+  InvalidAttributeDataType,
+  InvalidAttributeFilterLength
+}
 import tech.cryptonomic.conseil.common.generic.chain.{MetadataOperations, PlatformDiscoveryOperations}
 import tech.cryptonomic.conseil.common.generic.chain.PlatformDiscoveryTypes.DataType.DataType
 import tech.cryptonomic.conseil.common.generic.chain.PlatformDiscoveryTypes._

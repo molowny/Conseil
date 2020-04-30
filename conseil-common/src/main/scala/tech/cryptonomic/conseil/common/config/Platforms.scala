@@ -80,7 +80,6 @@ object Platforms {
   ) extends PlatformConfiguration
 
   /** unexpected or yet to define platform */
-  final case class UnknownPlatformConfiguration(network: String = "")
-      extends PlatformConfiguration
+  final case class UnknownPlatformConfiguration(network: String = "") extends PlatformConfiguration
 
 }
