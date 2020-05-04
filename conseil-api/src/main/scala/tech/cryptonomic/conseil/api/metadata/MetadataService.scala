@@ -25,10 +25,10 @@ class MetadataService(
   }.toMap
 
   private val entities = {
-    val futureEntities = platforms.map { platform =>
+    val futureEntities = Future.traverse(platforms) { platform =>
       platformDiscoveryOperations(platform.name).getEntities.map(v => platform.name -> v)
     }
-    val allEntities = Await.result(Future.sequence(futureEntities), 5 second).toMap
+    val allEntities = Await.result(futureEntities, 5 second).toMap
 
     networks.values.flatten
       .map(_.path)
