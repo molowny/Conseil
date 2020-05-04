@@ -40,7 +40,7 @@ class LorreAppConfigTest extends WordSpec with Matchers {
       "extract the client host pool configuration for streaming http" in {
         import scala.collection.JavaConverters._
 
-        val typedConfig = loadAkkaStreamingClientConfig(namespace = "akka.tezos-streaming-client")
+        val typedConfig = loadAkkaStreamingClientConfig(namespace = "akka.streaming-client")
         typedConfig shouldBe 'right
 
         val Right(HttpStreamingConfiguration(pool)) = typedConfig
@@ -64,7 +64,7 @@ class LorreAppConfigTest extends WordSpec with Matchers {
       "fail to extract the client host pool configuration with the wrong namespace" in {
         import pureconfig.error.ThrowableFailure
 
-        val typedConfig = loadAkkaStreamingClientConfig(namespace = "tezos-streaming-client")
+        val typedConfig = loadAkkaStreamingClientConfig(namespace = "streaming-client")
         typedConfig shouldBe 'left
 
         val Left(failures) = typedConfig

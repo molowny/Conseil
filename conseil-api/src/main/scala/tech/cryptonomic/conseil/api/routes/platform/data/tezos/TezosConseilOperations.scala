@@ -2,7 +2,7 @@ package tech.cryptonomic.conseil.api.routes.platform.data.tezos
 
 import com.github.ghik.silencer.silent
 import slick.jdbc.PostgresProfile.api._
-import tech.cryptonomic.conseil.common.sql.postgres.PostgresDataOperations
+import tech.cryptonomic.conseil.api.routes.platform.data.ApiDataOperations
 import tech.cryptonomic.conseil.common.tezos.TezosTypes.{AccountId, BlockHash}
 import tech.cryptonomic.conseil.common.tezos.{Tables, TezosDatabaseOperations => TezosDb}
 import tech.cryptonomic.conseil.common.util.DatabaseUtil
@@ -15,7 +15,7 @@ object TezosConseilOperations {
   case class AccountResult(account: Tables.AccountsRow)
 }
 
-class TezosConseilOperations extends PostgresDataOperations {
+class TezosConseilOperations extends ApiDataOperations {
   import TezosConseilOperations._
 
   override lazy val dbReadHandle: Database = DatabaseUtil.conseilDb

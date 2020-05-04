@@ -15,11 +15,10 @@ import com.typesafe.scalalogging.LazyLogging
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport
 import tech.cryptonomic.conseil.api.config.{ConseilAppConfig, ConseilConfiguration, NautilusCloudConfiguration}
 import tech.cryptonomic.conseil.api.directives.EnableCORSDirectives
-import tech.cryptonomic.conseil.api.metadata.MetadataService
+import tech.cryptonomic.conseil.api.metadata.{AttributeValuesCacheConfiguration, MetadataService, UnitTransformation}
 import tech.cryptonomic.conseil.common.config.Platforms.PlatformsConfiguration
 import tech.cryptonomic.conseil.api.security.Security.SecurityApi
 import tech.cryptonomic.conseil.common.config._
-import tech.cryptonomic.conseil.common.metadata.{AttributeValuesCacheConfiguration, UnitTransformation}
 import tech.cryptonomic.conseil.api.routes._
 import tech.cryptonomic.conseil.api.routes.info.AppInfo
 import tech.cryptonomic.conseil.api.routes.platform.data.tezos.{TezosConseilOperations, TezosData}

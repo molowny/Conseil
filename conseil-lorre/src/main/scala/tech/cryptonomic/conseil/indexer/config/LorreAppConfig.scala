@@ -92,7 +92,7 @@ trait LorreAppConfig {
       lorre <- loadConfig[LorreConfiguration](namespace = "lorre").map(_.copy(depth = depth, headHash = headHash))
       nodeRequests <- loadConfig[NetworkCallsConfiguration]("lorre")
       platform <- loadPlatformConfiguration(platform, network)
-      streamingClient <- loadAkkaStreamingClientConfig(namespace = "akka.tezos-streaming-client")
+      streamingClient <- loadAkkaStreamingClientConfig(namespace = "akka.streaming-client")
       fetching <- loadConfig[BatchFetchConfiguration](namespace = "lorre.batchedFetches")
     } yield
       CombinedConfiguration(

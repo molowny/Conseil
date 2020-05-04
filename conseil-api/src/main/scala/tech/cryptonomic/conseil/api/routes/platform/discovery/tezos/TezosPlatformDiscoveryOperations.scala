@@ -4,18 +4,14 @@ import cats.effect.{ContextShift, IO}
 import com.rklaehn.radixtree.RadixTree
 import slick.dbio.{DBIO, DBIOAction}
 import slick.jdbc.meta.{MColumn, MIndexInfo, MPrimaryKey, MTable}
+import tech.cryptonomic.conseil.api.metadata.AttributeValuesCacheConfiguration
+import tech.cryptonomic.conseil.api.routes.platform.Sanitizer
 import tech.cryptonomic.conseil.common.cache.MetadataCaching
-import tech.cryptonomic.conseil.common.generic.chain.DataTypes.{
-  AttributesValidationError,
-  HighCardinalityAttribute,
-  InvalidAttributeDataType,
-  InvalidAttributeFilterLength
-}
+import tech.cryptonomic.conseil.common.generic.chain.DataTypes.{AttributesValidationError, HighCardinalityAttribute, InvalidAttributeDataType, InvalidAttributeFilterLength}
 import tech.cryptonomic.conseil.common.generic.chain.PlatformDiscoveryTypes.DataType.DataType
 import tech.cryptonomic.conseil.common.generic.chain.PlatformDiscoveryTypes._
 import tech.cryptonomic.conseil.common.generic.chain.{MetadataOperations, PlatformDiscoveryOperations}
 import tech.cryptonomic.conseil.common.metadata._
-import tech.cryptonomic.conseil.common.sql.Sanitizer
 import tech.cryptonomic.conseil.common.tezos.TezosDatabaseOperations
 
 import scala.concurrent.duration.FiniteDuration

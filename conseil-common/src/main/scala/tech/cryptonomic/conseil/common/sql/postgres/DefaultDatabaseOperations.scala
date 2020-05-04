@@ -6,7 +6,7 @@ import slick.lifted.{AbstractTable, TableQuery}
 import scala.concurrent.ExecutionContext
 
 /** Provides basic SQL operations on Postgres database */
-case class PostgresDatabaseOperations(prefix: String) {
+case class DefaultDatabaseOperations(prefix: String) {
 
   /** Inserts to the table if table is empty
     * @param table slick TableQuery[_] to which we want to insert

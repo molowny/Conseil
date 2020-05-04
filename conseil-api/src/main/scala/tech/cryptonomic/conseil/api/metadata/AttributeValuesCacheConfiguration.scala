@@ -1,8 +1,9 @@
-package tech.cryptonomic.conseil.common.metadata
+package tech.cryptonomic.conseil.api.metadata
 
 import tech.cryptonomic.conseil.common.config.MetadataConfiguration
 import tech.cryptonomic.conseil.common.config.Types.{AttributeName, EntityName}
 import tech.cryptonomic.conseil.common.generic.chain.PlatformDiscoveryTypes.AttributeCacheConfiguration
+import tech.cryptonomic.conseil.common.metadata.{AttributePath, Path}
 import tech.cryptonomic.conseil.common.util.OptionUtil.when
 
 /** Class for extracting attribute cache configurations */

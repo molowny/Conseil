@@ -1,14 +1,9 @@
-package tech.cryptonomic.conseil.common.metadata
+package tech.cryptonomic.conseil.api.metadata
 
 import com.typesafe.scalalogging.LazyLogging
 import tech.cryptonomic.conseil.common.config.{MetadataConfiguration, PlatformConfiguration}
-import tech.cryptonomic.conseil.common.generic.chain.PlatformDiscoveryTypes.{
-  mapDataType,
-  Attribute,
-  Entity,
-  Network,
-  Platform
-}
+import tech.cryptonomic.conseil.common.generic.chain.PlatformDiscoveryTypes._
+import tech.cryptonomic.conseil.common.metadata._
 import tech.cryptonomic.conseil.common.util.OptionUtil.when
 
 // class for applying overrides configurations

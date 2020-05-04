@@ -1,4 +1,4 @@
-package tech.cryptonomic.conseil.api.routes
+package tech.cryptonomic.conseil.api.routes.platform.discovery
 
 import tech.cryptonomic.conseil.common.generic.chain.PlatformDiscoveryTypes.{Attribute, Entity}
 import tech.cryptonomic.conseil.common.generic.chain.{DataTypes, PlatformDiscoveryOperations, PlatformDiscoveryTypes}

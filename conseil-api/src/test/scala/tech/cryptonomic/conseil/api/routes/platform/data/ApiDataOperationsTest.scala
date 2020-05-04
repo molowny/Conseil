@@ -1,17 +1,17 @@
-package tech.cryptonomic.conseil.common.sql.postgres
+package tech.cryptonomic.conseil.api.routes.platform.data
 
 import org.scalatest.{Matchers, WordSpec}
 import tech.cryptonomic.conseil.common.generic.chain.DataTypes.{OperationType, Predicate}
 
-class PostgresDataOperationsTest extends WordSpec with Matchers {
+class ApiDataOperationsTest extends WordSpec with Matchers {
 
-  "PostgresDataOperations" should {
+  "ApiDataOperations" should {
       "sanitizeFields" in {
         // given
         val input = List.empty
 
         // when
-        val result = PostgresDataOperations.sanitizeFields(input)
+        val result = ApiDataOperations.sanitizeFields(input)
 
         // then
         result shouldBe List.empty
@@ -34,7 +34,7 @@ class PostgresDataOperationsTest extends WordSpec with Matchers {
         )
 
         // when
-        val results = PostgresDataOperations.sanitizePredicates(examplePredicates).head.set
+        val results = ApiDataOperations.sanitizePredicates(examplePredicates).head.set
 
         // then
         results should contain allElementsOf List(

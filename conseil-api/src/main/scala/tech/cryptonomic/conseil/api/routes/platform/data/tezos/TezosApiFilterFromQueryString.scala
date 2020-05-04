@@ -3,7 +3,6 @@ package tech.cryptonomic.conseil.api.routes.platform.data.tezos
 import cats.Functor
 import cats.syntax.functor._
 import endpoints.algebra
-import tech.cryptonomic.conseil.common.tezos.Filter
 
 /** Trait containing helper functions which are necessary for parsing query parameter strings as Filter  */
 private[tezos] trait TezosApiFilterFromQueryString { self: algebra.JsonEntities =>

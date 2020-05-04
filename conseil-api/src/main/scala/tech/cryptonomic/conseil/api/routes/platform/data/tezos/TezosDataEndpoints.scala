@@ -6,7 +6,7 @@ import tech.cryptonomic.conseil.api.routes.platform.data.tezos.TezosDataTypes.Ap
 import tech.cryptonomic.conseil.api.routes.validation.Validation
 import tech.cryptonomic.conseil.common.generic.chain.DataTypes._
 import tech.cryptonomic.conseil.common.tezos.Tables.BlocksRow
-import tech.cryptonomic.conseil.common.tezos.{Filter, Tables}
+import tech.cryptonomic.conseil.common.tezos.Tables
 
 /** Trait containing endpoints definition */
 trait TezosDataEndpoints

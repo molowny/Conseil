@@ -11,27 +11,13 @@ import tech.cryptonomic.conseil.common.config.Platforms.{BlockchainPlatform, Tez
 import tech.cryptonomic.conseil.common.config._
 import tech.cryptonomic.conseil.common.tezos.TezosTypes.{BlockHash, FetchRights, _}
 import tech.cryptonomic.conseil.common.tezos.michelson.contracts.{TNSContract, TokenContracts}
-import tech.cryptonomic.conseil.common.tezos.{
-  DatabaseConversions,
-  FeeOperations,
-  Tables,
-  TezosOptics,
-  TezosTypes,
-  TezosDatabaseOperations => TezosDb
-}
+import tech.cryptonomic.conseil.common.tezos.{DatabaseConversions, FeeOperations, Tables, TezosOptics, TezosTypes, TezosDatabaseOperations => TezosDb}
 import tech.cryptonomic.conseil.common.util.DatabaseUtil
 import tech.cryptonomic.conseil.indexer.config.LorreAppConfig.LORRE_FAILURE_IGNORE_VAR
-import tech.cryptonomic.conseil.indexer.{LorreIndexer, LorreLogging}
+import tech.cryptonomic.conseil.indexer.LorreIndexer
 import tech.cryptonomic.conseil.indexer.LorreIndexer.ShutdownComplete
-import tech.cryptonomic.conseil.indexer.config.{
-  BatchFetchConfiguration,
-  Custom,
-  Everything,
-  HttpStreamingConfiguration,
-  LorreConfiguration,
-  NetworkCallsConfiguration,
-  Newest
-}
+import tech.cryptonomic.conseil.indexer.config.{BatchFetchConfiguration, Custom, Everything, HttpStreamingConfiguration, LorreConfiguration, NetworkCallsConfiguration, Newest}
+import tech.cryptonomic.conseil.indexer.logging.LorreProgressLogging
 import tech.cryptonomic.conseil.indexer.tezos.TezosErrors._
 import tech.cryptonomic.conseil.indexer.tezos.TezosNodeOperator.LazyPages
 
@@ -50,7 +36,7 @@ class TezosIndexer(
     batchingConf: BatchFetchConfiguration
 ) extends LazyLogging
     with LorreIndexer
-    with LorreLogging {
+    with LorreProgressLogging {
 
   implicit private val system: ActorSystem = ActorSystem("lorre-tezos-indexer")
   implicit private val materializer: ActorMaterializer = ActorMaterializer()

@@ -5,10 +5,10 @@ import slick.basic.Capability
 import slick.jdbc.JdbcCapabilities
 
 /** Custom postgres profile for enabling `insertOrUpdateAll` */
-trait PostgresProfileExtension extends ExPostgresProfile {
+trait CustomProfileExtension extends ExPostgresProfile {
   // Add back `capabilities.insertOrUpdate` to enable native `upsert` support; for postgres 9.5+
   override protected def computeCapabilities: Set[Capability] =
     super.computeCapabilities + JdbcCapabilities.insertOrUpdate
 }
 
-object PostgresProfileExtension extends PostgresProfileExtension
+object CustomProfileExtension extends CustomProfileExtension

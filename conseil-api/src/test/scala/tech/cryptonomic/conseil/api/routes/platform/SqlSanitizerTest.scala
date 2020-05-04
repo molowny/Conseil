@@ -1,4 +1,4 @@
-package tech.cryptonomic.conseil.common.sql
+package tech.cryptonomic.conseil.api.routes.platform
 
 import org.scalatest.{Matchers, WordSpec}
 

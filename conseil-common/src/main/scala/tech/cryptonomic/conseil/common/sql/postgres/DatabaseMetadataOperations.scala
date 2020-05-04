@@ -5,8 +5,8 @@ import tech.cryptonomic.conseil.common.generic.chain.MetadataOperations
 
 import scala.concurrent.Future
 
-/** Provides the implementation for `MetadataOperations` trait */
-trait PostgresMetadataOperations extends MetadataOperations {
+/** Provides the implementation for `MetadataOperations` trait from database */
+trait DatabaseMetadataOperations extends MetadataOperations {
   def dbReadHandle: Database
 
   /**

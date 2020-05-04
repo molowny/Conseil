@@ -5,15 +5,14 @@ import java.sql.Timestamp
 import org.scalamock.scalatest.MockFactory
 import org.scalatest._
 import org.scalatest.concurrent.ScalaFutures
-import tech.cryptonomic.conseil.api.metadata.MetadataService
+import tech.cryptonomic.conseil.api.metadata.{AttributeValuesCacheConfiguration, MetadataService, TransparentUnitTransformation}
 import tech.cryptonomic.conseil.api.routes.platform.data.tezos.TezosDataTypes.ApiQuery
+import tech.cryptonomic.conseil.api.routes.platform.discovery.TestPlatformDiscoveryOperations
 import tech.cryptonomic.conseil.common.config.Platforms._
 import tech.cryptonomic.conseil.common.config.{MetadataConfiguration, Platforms}
 import tech.cryptonomic.conseil.common.generic.chain.DataTypes._
 import tech.cryptonomic.conseil.common.generic.chain.PlatformDiscoveryTypes.{Attribute, DataType, Entity, KeyType}
 import tech.cryptonomic.conseil.common.metadata._
-import tech.cryptonomic.conseil.api.routes.TestPlatformDiscoveryOperations
-import tech.cryptonomic.conseil.api.routes.TransparentUnitTransformation
 
 class TezosDataTypesTest
     extends WordSpec

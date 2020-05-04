@@ -1,15 +1,16 @@
-package tech.cryptonomic.conseil.common.sql.postgres
+package tech.cryptonomic.conseil.api.routes.platform.data
 
 import slick.jdbc.PostgresProfile.api._
 import tech.cryptonomic.conseil.common.generic.chain.DataOperations
 import tech.cryptonomic.conseil.common.generic.chain.DataTypes.OutputType.OutputType
 import tech.cryptonomic.conseil.common.generic.chain.DataTypes.{Field, Predicate, Query, QueryResponse, _}
-import tech.cryptonomic.conseil.common.sql.Sanitizer._
-import tech.cryptonomic.conseil.common.util.DatabaseUtil.QueryBuilder.{makeQuery, makeTemporalQuery, _}
+import tech.cryptonomic.conseil.api.routes.platform.Sanitizer._
+import tech.cryptonomic.conseil.common.sql.postgres.DatabaseMetadataOperations
+import tech.cryptonomic.conseil.common.util.DatabaseUtil.QueryBuilder._
 
 import scala.concurrent.{ExecutionContext, Future}
 
-object PostgresDataOperations {
+object ApiDataOperations {
 
   /** Sanitizes predicate values so query is safe from SQL injection */
   def sanitizePredicates(predicates: List[Predicate]): List[Predicate] =
@@ -27,8 +28,8 @@ object PostgresDataOperations {
 }
 
 /** Provides the implementation for `DataOperations` trait */
-trait PostgresDataOperations extends PostgresMetadataOperations with DataOperations {
-  import PostgresDataOperations._
+trait ApiDataOperations extends DatabaseMetadataOperations with DataOperations {
+  import ApiDataOperations._
 
   /** Executes the query with given predicates
     *
