@@ -15,13 +15,18 @@ import com.typesafe.scalalogging.LazyLogging
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport
 import tech.cryptonomic.conseil.api.config.{ConseilAppConfig, ConseilConfiguration, NautilusCloudConfiguration}
 import tech.cryptonomic.conseil.api.directives.EnableCORSDirectives
+import tech.cryptonomic.conseil.api.metadata.MetadataService
 import tech.cryptonomic.conseil.common.config.Platforms.PlatformsConfiguration
 import tech.cryptonomic.conseil.api.security.Security.SecurityApi
 import tech.cryptonomic.conseil.common.config._
-import tech.cryptonomic.conseil.common.metadata.{AttributeValuesCacheConfiguration, MetadataService, UnitTransformation}
+import tech.cryptonomic.conseil.common.metadata.{AttributeValuesCacheConfiguration, UnitTransformation}
 import tech.cryptonomic.conseil.api.routes._
+import tech.cryptonomic.conseil.api.routes.info.AppInfo
+import tech.cryptonomic.conseil.api.routes.platform.data.tezos.{TezosConseilOperations, TezosData}
+import tech.cryptonomic.conseil.api.routes.platform.discovery.PlatformDiscovery
+import tech.cryptonomic.conseil.api.routes.platform.discovery.tezos.TezosPlatformDiscoveryOperations
 import tech.cryptonomic.conseil.api.security.Security
-import tech.cryptonomic.conseil.common.tezos.{MetadataCaching, TezosPlatformDiscoveryOperations}
+import tech.cryptonomic.conseil.common.cache.MetadataCaching
 import tech.cryptonomic.conseil.common.util.RecordingDirectives
 import tech.cryptonomic.conseil.common.util.Retry.retry
 
@@ -45,7 +50,7 @@ object Conseil
       implicit val system: ActorSystem = ActorSystem("conseil-system")
       implicit val materializer: ActorMaterializer = ActorMaterializer()
       implicit val executionContext: ExecutionContextExecutor = system.dispatcher
-      lazy val ops = new ConseilOperations
+      lazy val ops = new TezosConseilOperations
 
       val retries = if (failFast.on) Some(0) else None
 
@@ -82,7 +87,7 @@ object Conseil
     * @return a metadata services object or a failed result
     */
   def initServices(
-      conseilOperations: ConseilOperations,
+      conseilOperations: TezosConseilOperations,
       server: ConseilConfiguration,
       platforms: PlatformsConfiguration,
       metadataOverrides: MetadataConfiguration,
@@ -136,7 +141,7 @@ object Conseil
     */
   def runServer(
       metadataService: MetadataService,
-      conseilOperations: ConseilOperations,
+      conseilOperations: TezosConseilOperations,
       server: ConseilConfiguration,
       platforms: PlatformsConfiguration,
       metadataOverrides: MetadataConfiguration,
@@ -147,7 +152,7 @@ object Conseil
 
     lazy val platformDiscovery = PlatformDiscovery(metadataService)
     lazy val data =
-      Data(metadataService, metadataOverrides, conseilOperations, server.maxQueryResultSize)(tezosDispatcher)
+      TezosData(metadataService, metadataOverrides, conseilOperations, server.maxQueryResultSize)(tezosDispatcher)
     implicit val contextShift: ContextShift[IO] = IO.contextShift(executionContext)
     lazy val routeUtil = new RecordingDirectives
 

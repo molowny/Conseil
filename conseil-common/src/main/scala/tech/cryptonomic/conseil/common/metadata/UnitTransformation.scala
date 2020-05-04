@@ -2,8 +2,13 @@ package tech.cryptonomic.conseil.common.metadata
 
 import com.typesafe.scalalogging.LazyLogging
 import tech.cryptonomic.conseil.common.config.{MetadataConfiguration, PlatformConfiguration}
-import tech.cryptonomic.conseil.common.generic.chain.PlatformDiscoveryTypes.{Attribute, Entity, Network, Platform}
-import tech.cryptonomic.conseil.common.tezos.TezosPlatformDiscoveryOperations.mapType
+import tech.cryptonomic.conseil.common.generic.chain.PlatformDiscoveryTypes.{
+  mapDataType,
+  Attribute,
+  Entity,
+  Network,
+  Platform
+}
 import tech.cryptonomic.conseil.common.util.OptionUtil.when
 
 // class for applying overrides configurations
@@ -91,7 +96,7 @@ class UnitTransformation(overrides: MetadataConfiguration) extends LazyLogging {
         placeholder = overrideAttribute.flatMap(_.placeholder),
         dataFormat = overrideAttribute.flatMap(_.dataFormat),
         scale = overrideAttribute.flatMap(_.scale),
-        dataType = overrideAttribute.flatMap(_.dataType).map(mapType).getOrElse(attribute.dataType),
+        dataType = overrideAttribute.flatMap(_.dataType).map(mapDataType).getOrElse(attribute.dataType),
         valueMap = overrideAttribute.flatMap(_.valueMap).filter(_.nonEmpty),
         reference = overrideAttribute.flatMap(_.reference).filter(_.nonEmpty),
         cacheConfig = overrideAttribute.flatMap(_.cacheConfig),

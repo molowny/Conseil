@@ -49,8 +49,6 @@ trait ConseilAppConfig {
   protected def loadApplicationConfiguration(commandLineArgs: Array[String]): ConfigReader.Result[Configurations] = {
     import ConseilAppConfig.Implicits._
 
-    implicit def hint[T]: ProductHint[T] = ProductHint[T](ConfigFieldMapping(CamelCase, CamelCase))
-
     /** Use the pureconfig convention to handle configuration from the command line */
     def readArgs(args: Array[String]): ConfigReader.Result[ArgumentsConfig] =
       argsParser.parse(args, ArgumentsConfig()).toRight[ConfigReaderFailures](sys.exit(1))
