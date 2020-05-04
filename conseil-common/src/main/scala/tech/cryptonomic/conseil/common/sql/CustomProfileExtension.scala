@@ -1,4 +1,4 @@
-package tech.cryptonomic.conseil.common.sql.postgres
+package tech.cryptonomic.conseil.common.sql
 
 import com.github.tminglei.slickpg.ExPostgresProfile
 import slick.basic.Capability

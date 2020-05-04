@@ -1,4 +1,4 @@
-package tech.cryptonomic.conseil.common.util
+package tech.cryptonomic.conseil.api.util
 
 /* The following code is adapted from https://github.com/seahrh/concurrent-scala and subject to licensing terms hereby specified
  * MIT License
@@ -12,8 +12,8 @@ package tech.cryptonomic.conseil.common.util
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 import scala.annotation.tailrec
-import scala.concurrent.{blocking, Await, ExecutionContext, Future, Promise}
 import scala.concurrent.duration.{Deadline, Duration, DurationLong}
+import scala.concurrent._
 import scala.language.postfixOps
 import scala.util.{Failure, Random, Success, Try}
 

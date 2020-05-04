@@ -14,7 +14,7 @@ import tech.cryptonomic.conseil.common.tezos.michelson.contracts.TokenContracts
 import tech.cryptonomic.conseil.common.tezos.TezosDataGeneration
 import java.sql.Timestamp
 
-import tech.cryptonomic.conseil.common.sql.postgres.CustomProfileExtension
+import tech.cryptonomic.conseil.common.sql.CustomProfileExtension
 import tech.cryptonomic.conseil.common.testkit.InMemoryDatabase
 import tech.cryptonomic.conseil.common.testkit.util.RandomSeed
 

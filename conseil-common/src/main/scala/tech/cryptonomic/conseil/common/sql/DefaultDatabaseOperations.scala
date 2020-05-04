@@ -1,4 +1,4 @@
-package tech.cryptonomic.conseil.common.sql.postgres
+package tech.cryptonomic.conseil.common.sql
 
 import slick.jdbc.PostgresProfile.api._
 import slick.lifted.{AbstractTable, TableQuery}

@@ -25,9 +25,9 @@ import tech.cryptonomic.conseil.api.routes.platform.data.tezos.{TezosConseilOper
 import tech.cryptonomic.conseil.api.routes.platform.discovery.PlatformDiscovery
 import tech.cryptonomic.conseil.api.routes.platform.discovery.tezos.TezosPlatformDiscoveryOperations
 import tech.cryptonomic.conseil.api.security.Security
+import tech.cryptonomic.conseil.api.util.RecordingDirectives
 import tech.cryptonomic.conseil.common.cache.MetadataCaching
-import tech.cryptonomic.conseil.common.util.RecordingDirectives
-import tech.cryptonomic.conseil.common.util.Retry.retry
+import tech.cryptonomic.conseil.api.util.Retry.retry
 
 import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext, ExecutionContextExecutor}

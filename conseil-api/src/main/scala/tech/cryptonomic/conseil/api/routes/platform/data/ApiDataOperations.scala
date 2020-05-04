@@ -5,7 +5,7 @@ import tech.cryptonomic.conseil.common.generic.chain.DataOperations
 import tech.cryptonomic.conseil.common.generic.chain.DataTypes.OutputType.OutputType
 import tech.cryptonomic.conseil.common.generic.chain.DataTypes.{Field, Predicate, Query, QueryResponse, _}
 import tech.cryptonomic.conseil.api.routes.platform.Sanitizer._
-import tech.cryptonomic.conseil.common.sql.postgres.DatabaseMetadataOperations
+import tech.cryptonomic.conseil.common.sql.DatabaseMetadataOperations
 import tech.cryptonomic.conseil.common.util.DatabaseUtil.QueryBuilder._
 
 import scala.concurrent.{ExecutionContext, Future}

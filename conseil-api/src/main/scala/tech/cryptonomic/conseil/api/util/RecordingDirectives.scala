@@ -1,4 +1,4 @@
-package tech.cryptonomic.conseil.common.util
+package tech.cryptonomic.conseil.api.util
 
 import java.util.UUID
 

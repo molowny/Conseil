@@ -1,7 +1,7 @@
 package tech.cryptonomic.conseil.indexer.tezos
 
 import slick.jdbc.PostgresProfile.api._
-import tech.cryptonomic.conseil.common.sql.postgres.DatabaseMetadataOperations
+import tech.cryptonomic.conseil.common.sql.DatabaseMetadataOperations
 import tech.cryptonomic.conseil.common.tezos.Tables
 import tech.cryptonomic.conseil.common.util.DatabaseUtil
 

@@ -23,7 +23,7 @@ import tech.cryptonomic.conseil.common.tezos.Tables.GovernanceRow
 import tech.cryptonomic.conseil.common.tezos.TezosTypes.FetchRights
 import tech.cryptonomic.conseil.common.tezos.TezosTypes.Voting.BakerRolls
 import slick.lifted.{AbstractTable, TableQuery}
-import tech.cryptonomic.conseil.common.sql.postgres.{DefaultDatabaseOperations, CustomProfileExtension}
+import tech.cryptonomic.conseil.common.sql.{CustomProfileExtension, DefaultDatabaseOperations}
 
 import scala.collection.immutable.Queue
 import tech.cryptonomic.conseil.common.tezos.michelson.contracts.TokenContracts
