@@ -135,7 +135,7 @@ object DataTypes {
       temporalPartition: Option[String] = None,
       snapshot: Option[Snapshot] = None
   ) {
-    def adjustLimit(value: Int): Query = copy(limit = Math.min(limit, value))
+    def withLimitCap(value: Int): Query = copy(limit = Math.min(limit, value))
   }
 
   /** Class representing predicate used in aggregation */

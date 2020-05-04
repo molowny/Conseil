@@ -4,7 +4,7 @@ import org.scalatest.{Matchers, WordSpec}
 
 class SqlSanitizerTest extends WordSpec with Matchers {
 
-  "SqlSanitizerTest" should {
+  "SqlSanitizer" should {
       "sanitizeForSql alphanumeric string" in {
         // given
         val input = "xyz123"

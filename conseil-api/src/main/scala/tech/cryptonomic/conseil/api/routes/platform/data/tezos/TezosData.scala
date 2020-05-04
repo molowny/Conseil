@@ -40,7 +40,7 @@ case class TezosData(
           .validate(path, metadataService, metadataConfiguration)
           .flatMap { validationResult =>
             validationResult.map { validQuery =>
-              conseilOperations.queryWithPredicates(platform, entity, validQuery.adjustLimit(maxQueryResultSize)).map {
+              conseilOperations.queryWithPredicates(platform, entity, validQuery.withLimitCap(maxQueryResultSize)).map {
                 queryResponses =>
                   QueryResponseWithOutput(queryResponses, validQuery.output)
               }
@@ -55,7 +55,7 @@ case class TezosData(
     case ((platform, network, filter), _) =>
       platformNetworkValidation(platform, network) {
         conseilOperations
-          .queryWithPredicates(platform, "blocks", filter.toQuery.adjustLimit(maxQueryResultSize))
+          .queryWithPredicates(platform, "blocks", filter.toQuery.withLimitCap(maxQueryResultSize))
           .map(Option(_))
       }
   }
@@ -81,7 +81,7 @@ case class TezosData(
     case ((platform, network, filter), _) =>
       platformNetworkValidation(platform, network) {
         conseilOperations
-          .queryWithPredicates(platform, "accounts", filter.toQuery.adjustLimit(maxQueryResultSize))
+          .queryWithPredicates(platform, "accounts", filter.toQuery.withLimitCap(maxQueryResultSize))
           .map(Some(_))
       }
   }
@@ -99,7 +99,7 @@ case class TezosData(
     case ((platform, network, filter), _) =>
       platformNetworkValidation(platform, network) {
         conseilOperations
-          .queryWithPredicates(platform, "operation_groups", filter.toQuery.adjustLimit(maxQueryResultSize))
+          .queryWithPredicates(platform, "operation_groups", filter.toQuery.withLimitCap(maxQueryResultSize))
           .map(Some(_))
       }
   }
@@ -117,7 +117,7 @@ case class TezosData(
     case ((platform, network, filter), _) =>
       platformNetworkValidation(platform, network) {
         conseilOperations
-          .queryWithPredicates(platform, "fees", filter.toQuery.adjustLimit(maxQueryResultSize))
+          .queryWithPredicates(platform, "fees", filter.toQuery.withLimitCap(maxQueryResultSize))
           .map(_.headOption)
       }
   }
@@ -127,7 +127,7 @@ case class TezosData(
     case ((platform, network, filter), _) =>
       platformNetworkValidation(platform, network) {
         conseilOperations
-          .queryWithPredicates(platform, "operations", filter.toQuery.adjustLimit(maxQueryResultSize))
+          .queryWithPredicates(platform, "operations", filter.toQuery.withLimitCap(maxQueryResultSize))
           .map(Some(_))
       }
   }

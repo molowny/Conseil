@@ -9,8 +9,8 @@ import pureconfig.generic.auto._
 import pureconfig.{ConfigReader, _}
 import scopt.OptionParser
 import tech.cryptonomic.conseil.api.security.Security
-import tech.cryptonomic.conseil.common.config.Platforms._
 import tech.cryptonomic.conseil.api.security.Security._
+import tech.cryptonomic.conseil.common.config.Platforms._
 import tech.cryptonomic.conseil.common.config._
 
 import scala.util.Try

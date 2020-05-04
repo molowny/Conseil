@@ -148,11 +148,11 @@ object Conseil
       securityApi: SecurityApi,
       verbose: VerboseOutput
   )(implicit executionContext: ExecutionContext, system: ActorSystem, mat: ActorMaterializer) = {
-    val tezosDispatcher = system.dispatchers.lookup("akka.tezos-dispatcher")
+    val dispatcher = system.dispatchers.lookup("akka.http.dispatcher")
 
     lazy val platformDiscovery = PlatformDiscovery(metadataService)
     lazy val data =
-      TezosData(metadataService, metadataOverrides, conseilOperations, server.maxQueryResultSize)(tezosDispatcher)
+      TezosData(metadataService, metadataOverrides, conseilOperations, server.maxQueryResultSize)(dispatcher)
     implicit val contextShift: ContextShift[IO] = IO.contextShift(executionContext)
     lazy val routeUtil = new RecordingDirectives
 
