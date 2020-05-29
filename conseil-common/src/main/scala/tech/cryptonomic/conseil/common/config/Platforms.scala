@@ -85,8 +85,22 @@ object Platforms {
       tns: Option[TNSContractConfiguration]
   ) extends PlatformConfiguration
 
+  /** configurations to describe a bitcoin node */
+  final case class BitcoinNodeConfiguration(
+      hostname: String,
+      port: Int,
+      protocol: String,
+      username: String,
+      password: String
+  ) {
+    val url = s"$protocol://$hostname:$port"
+  }
+
   /** collects all config related to a bitcoin network */
-  final case class BitcoinConfiguration(network: String) extends PlatformConfiguration
+  final case class BitcoinConfiguration(
+      network: String,
+      nodeConfig: BitcoinNodeConfiguration
+  ) extends PlatformConfiguration
 
   /** unexpected or yet to define platform */
   final case class UnknownPlatformConfiguration(network: String = "") extends PlatformConfiguration
