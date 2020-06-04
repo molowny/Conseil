@@ -44,7 +44,7 @@ object Lorre extends App with LazyLogging with LorreAppConfig with LorreInfoLogg
       TezosIndexer.fromConfig(lorreConf, conf, callsConf, streamingClientConf, batchingConf)
     case conf: BitcoinConfiguration =>
       logger.info("Initializing indexer for Bitcoin Blockchain.")
-      BitcoinIndexer.fromConfig(lorreConf, conf, callsConf, streamingClientConf, batchingConf)
+      BitcoinIndexer.fromConfig(lorreConf, conf)
     case _: UnknownPlatformConfiguration =>
       logger.error("Could not initialize indexer. Unsupported platform has been read from configuration file.")
       sys.exit(1)
