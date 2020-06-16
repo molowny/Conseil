@@ -22,12 +22,11 @@ object Dependencies {
     val postgres = "42.1.4"
 
     val endpoints = "0.9.0"
-    val cats = "2.1.1"
-    val catsEffect = "2.1.3"
+    val cats = "1.6.0"
     val mouse = "0.20"
     val monocle = "1.5.1-cats"
-    val circe = "0.12.3"
-    val http4s = "0.21.4"
+    val circe = "0.11.1"
+    val http4s = "0.20.10"
 
     val silencer = "1.4.4"
     val kantanCsv = "0.6.0"
@@ -94,11 +93,6 @@ object Dependencies {
     "com.kubukoz" %% "slick-effect-transactor" % Versions.slickEffect exclude ("com.typesafe.slick", "slick")
   )
 
-  private val doobie = Seq(
-    "org.tpolecat" %% "doobie-core",
-    "org.tpolecat" %% "doobie-postgres"
-  ).map(_ % "0.9.0")
-
   private val postgres = Seq("org.postgresql" % "postgresql" % Versions.postgres)
 
   private val endpoints = Seq(
@@ -110,8 +104,6 @@ object Dependencies {
   )
 
   private val cats = Seq("org.typelevel"  %% "cats-core" % Versions.cats)
-  private val catsEffect = Seq("org.typelevel"  %% "cats-effect" % Versions.catsEffect)
-  
   private val mouse = Seq("org.typelevel" %% "mouse"     % Versions.mouse) // related to cats
 
   private val monocle = Seq(
@@ -123,7 +115,7 @@ object Dependencies {
     "io.circe" %% "circe-core"           % Versions.circe,
     "io.circe" %% "circe-parser"         % Versions.circe,
     "io.circe" %% "circe-generic"        % Versions.circe,
-    "io.circe" %% "circe-generic-extras" % "0.13.0"
+    "io.circe" %% "circe-generic-extras" % Versions.circe
   )
 
   private val http4s = Seq(
@@ -186,8 +178,6 @@ object Dependencies {
       postgres,
       circe,
       cats,
-      catsEffect,
-      http4s,
       mouse,
       http4s,
       radixTree,
@@ -226,11 +216,11 @@ object Dependencies {
     )
 
   val conseilLorreInclude: Seq[ModuleID] =
-    concat(config, logging, pureConfig, scopt, silencer, akka, akkaHttp, scalaTest, scalaMock, diffX, http4s, circe, cats, catsEffect, doobie)
+    concat(config, logging, pureConfig, scopt, silencer, akka, akkaHttp, scalaTest, scalaMock, diffX)
 
   val conseilSchemaInclude: Seq[ModuleID] = concat(config, pureConfig)
 
-  val conseilSmokeTestsInclude: Seq[ModuleID] = concat(config, http4s, circe, cats, catsEffect)
+  val conseilSmokeTestsInclude: Seq[ModuleID] = concat(config, http4s, circe, cats)
 
   private def concat(xs: Seq[ModuleID]*): Seq[ModuleID] = xs.reduceLeft(_ ++ _)
 
