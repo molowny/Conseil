@@ -121,7 +121,18 @@ class GenericPlatformDiscoveryOperationsTest
                     None
                   )
                 ),
-            Bitcoin -> List(BitcoinConfiguration("mainnet"))
+            Bitcoin -> List(
+                  BitcoinConfiguration(
+                    "mainnet",
+                    BitcoinNodeConfiguration(
+                      hostname = "mainnet",
+                      port = 1,
+                      protocol = "https",
+                      username = "username",
+                      password = "password"
+                    )
+                  )
+                )
           )
         )
 
