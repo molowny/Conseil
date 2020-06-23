@@ -21,9 +21,9 @@ import tech.cryptonomic.conseil.common.rpc.RpcClient._
   *   import io.circe.generic.auto._
   *   import org.http4s.circe.CirceEntityDecoder._
   *   import org.http4s.circe.CirceEntityEncoder._
-  * 
+  *
   *   implicit val contextShift = IO.contextShift(ExecutionContext.global)
-  *   
+  *
   *   // Define case class for JSON-RPC method and response
   *   case class ApiMethodParams(id: Int)
   *   case class ApiMethodResponse(name: String)
@@ -129,7 +129,7 @@ object RpcClient {
 
   /**
     * Exception with JSON-RPC error message
-    * 
+    *
     * Defined Error Codes:
     * -32700 ---> parse error. not well formed
     * -32701 ---> parse error. unsupported encoding
@@ -141,8 +141,8 @@ object RpcClient {
     * -32500 ---> application error
     * -32400 ---> system error
     * -32300 ---> transport error
-    * 
-    * In addition, the range -32099 .. -32000, inclusive is reserved for implementation defined server errors. 
+    *
+    * In addition, the range -32099 .. -32000, inclusive is reserved for implementation defined server errors.
     */
   case class RpcException(
       code: Int,
