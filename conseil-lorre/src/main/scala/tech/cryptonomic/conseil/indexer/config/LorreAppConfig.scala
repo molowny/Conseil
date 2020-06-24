@@ -152,7 +152,8 @@ object LorreAppConfig {
         case Bitcoin =>
           for {
             node <- loadConfig[BitcoinNodeConfiguration](namespace = s"platforms.$platform.$network.node")
-          } yield BitcoinConfiguration(network, node)
+            batchFetchConfiguration <- loadConfig[BitcoinBatchFetchConfiguration](namespace = s"platforms.$platform.$network.batching")
+          } yield BitcoinConfiguration(network, node, batchFetchConfiguration)
         case UnknownPlatform(_) => Right(UnknownPlatformConfiguration(network))
       }
     }

@@ -96,10 +96,19 @@ object Platforms {
     val url = s"$protocol://$hostname:$port"
   }
 
+  final case class BitcoinBatchFetchConfiguration(
+    indexerThreadsCount: Int,
+    httpFetchThreadsCount: Int,
+    hashBatchSize: Int,
+    blocksBatchSize: Int,
+    transactionsBatchSize: Int
+  )
+
   /** collects all config related to a bitcoin network */
   final case class BitcoinConfiguration(
       network: String,
-      nodeConfig: BitcoinNodeConfiguration
+      nodeConfig: BitcoinNodeConfiguration,
+      batchingConf: BitcoinBatchFetchConfiguration
   ) extends PlatformConfiguration
 
   /** unexpected or yet to define platform */
