@@ -121,7 +121,25 @@ class GenericPlatformDiscoveryOperationsTest
                     None
                   )
                 ),
-            Bitcoin -> List(BitcoinConfiguration("mainnet"))
+            Bitcoin -> List(
+                  BitcoinConfiguration(
+                    "mainnet",
+                    BitcoinNodeConfiguration(
+                      hostname = "mainnet",
+                      port = 1,
+                      protocol = "https",
+                      username = "username",
+                      password = "password"
+                    ),
+                    BitcoinBatchFetchConfiguration(
+                      indexerThreadsCount = 1,
+                      httpFetchThreadsCount = 1,
+                      hashBatchSize = 1,
+                      blocksBatchSize = 1,
+                      transactionsBatchSize = 1
+                    )
+                  )
+                )
           )
         )
 

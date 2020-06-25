@@ -149,6 +149,11 @@ object LorreAppConfig {
             node <- loadConfig[TezosNodeConfiguration](namespace = s"platforms.$platform.$network.node")
             tns <- loadConfig[Option[TNSContractConfiguration]](namespace = s"tns.$network")
           } yield TezosConfiguration(network, node, tns)
+        case Bitcoin =>
+          for {
+            node <- loadConfig[BitcoinNodeConfiguration](namespace = s"platforms.$platform.$network.node")
+            batchFetchConfiguration <- loadConfig[BitcoinBatchFetchConfiguration](namespace = s"platforms.$platform.$network.batching")
+          } yield BitcoinConfiguration(network, node, batchFetchConfiguration)
         case UnknownPlatform(_) => Right(UnknownPlatformConfiguration(network))
       }
     }
